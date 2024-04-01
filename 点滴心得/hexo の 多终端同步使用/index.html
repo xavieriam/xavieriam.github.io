@@ -16,16 +16,16 @@
   <meta name="author" content="玛玛弥亚">
   <meta name="keywords" content="">
   
-    <meta name="description" content="配置思路远程分支：maser、hexo存放不同文件内容。  hexo分支：存放本地文件，包括建站所需的配置文件、资源文件夹、主题文件夹、模板文件夹等，具体如下：  【注】这里没有public文件夹，其实本地执行hexo d -g等发布命令会将由md文件渲染的静态文件放入public中。  12345678.├── _config.yml  网站的 配置 信息，您可以在此配置大部分的参数├── pa">
+    <meta name="description" content="方法一配置思路远程分支：maser、hexo存放不同文件内容。  hexo分支：存放本地文件，包括建站所需的配置文件、资源文件夹、主题文件夹、模板文件夹等，具体如下：  【注】这里没有public文件夹，其实本地执行hexo d -g等发布命令会将由md文件渲染的静态文件放入public中。  12345678.├── _config.yml  网站的 配置 信息，您可以在此配置大部分的参数├──">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo の 多终端同步使用">
 <meta property="og:url" content="https://xavieriam.github.io/%E7%82%B9%E6%BB%B4%E5%BF%83%E5%BE%97/hexo%20%E3%81%AE%20%E5%A4%9A%E7%BB%88%E7%AB%AF%E5%90%8C%E6%AD%A5%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="玛玛弥亚的篱笆围">
-<meta property="og:description" content="配置思路远程分支：maser、hexo存放不同文件内容。  hexo分支：存放本地文件，包括建站所需的配置文件、资源文件夹、主题文件夹、模板文件夹等，具体如下：  【注】这里没有public文件夹，其实本地执行hexo d -g等发布命令会将由md文件渲染的静态文件放入public中。  12345678.├── _config.yml  网站的 配置 信息，您可以在此配置大部分的参数├── pa">
+<meta property="og:description" content="方法一配置思路远程分支：maser、hexo存放不同文件内容。  hexo分支：存放本地文件，包括建站所需的配置文件、资源文件夹、主题文件夹、模板文件夹等，具体如下：  【注】这里没有public文件夹，其实本地执行hexo d -g等发布命令会将由md文件渲染的静态文件放入public中。  12345678.├── _config.yml  网站的 配置 信息，您可以在此配置大部分的参数├──">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://xavieriam.github.io/img/index_img/blog.png">
 <meta property="article:published_time" content="2024-03-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-01T03:35:09.955Z">
+<meta property="article:modified_time" content="2024-04-01T06:55:11.370Z">
 <meta property="article:author" content="玛玛弥亚">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://xavieriam.github.io/img/index_img/blog.png">
@@ -245,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          952 字
+          1.6k 字
         
       </span>
     
@@ -256,7 +256,7 @@
         
         
         
-          8 分钟
+          14 分钟
         
       </span>
     
@@ -319,7 +319,7 @@
             
               <div class="markdown-body">
                 
-                <h2 id="配置思路"><a href="#配置思路" class="headerlink" title="配置思路"></a>配置思路</h2><p>远程分支：maser、hexo存放不同文件内容。</p>
+                <h1 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h1><h2 id="配置思路"><a href="#配置思路" class="headerlink" title="配置思路"></a>配置思路</h2><p>远程分支：maser、hexo存放不同文件内容。</p>
 <ul>
 <li><p>hexo分支：存放本地文件，包括建站所需的配置文件、资源文件夹、主题文件夹、模板文件夹等，具体如下：</p>
 <span class="label label-info"> 【注】这里没有public文件夹，其实本地执行hexo d -g等发布命令会将由md文件渲染的静态文件放入public中。</span>
@@ -359,11 +359,76 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fuchaosz/article/details/52170105">https://blog.csdn.net/fuchaosz/article/details/52170105</a></p>
 </li>
 </ul>
+<h1 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h1><p>在利用Hexo+Github Pages写我们的博客的时候，真正的原始Hexo文件在我们的电脑本地，而GitHub上传的只是Hexo生成的静态网页，即public文件夹里面的内容。</p>
+<p>那么假如我们有两台电脑工作，Hexo最开始搭建在其中一台电脑上，而我们需要在另外一台电脑上同时更新我们的博客，该怎么做呢？</p>
+<p>也就是说，我们需要实现多台电脑间博客项目的迁移与同步。为实现这一点，我们可以利用Git的分支。</p>
+<h2 id="配置Git分支"><a href="#配置Git分支" class="headerlink" title="配置Git分支"></a>配置Git分支</h2><ol>
+<li><p>创建分支，并将之设置为默认分支</p>
+<p>博客搭建好后，进入 GitHub 的 yourname.github.io 仓，创建一个名为 hexo 的分支</p>
+<p>将博客项目仓库的 Settings -&gt; Branches -&gt; Default branch 修改为 hexo</p>
+</li>
+<li><p>将创建的分支的远程仓库克隆到本地</p>
+<p>随便在一个文件夹中 open git bash</p>
+<figure class="highlight plaintext"><figcaption><span>bash</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs git">git clone git@github.com:yourname/yourname.github.io.git<br></code></pre></td></tr></table></figure>
+
+<p>文件夹中将生成一个名为 yourname.github.io 文件夹</p>
+</li>
+<li><p>清空 GitHub 博客仓的 hexo 分支</p>
+<ol>
+<li><p>进入该 yourname.github.io 文件夹</p>
+</li>
+<li><p>勾选查看隐藏的文件</p>
+</li>
+<li><p>删去除.git文件夹以外的所有文件</p>
+</li>
+<li><p>在克隆的仓库下分别执行以下命令更新删除操作到远程</p>
+<figure class="highlight plaintext"><figcaption><span>bash</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs git">git branch  # 确认你的分支，以防推送失误<br>git add -A<br>git commit -m &quot;--&quot;<br>git push origin hexo<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>更新 GitHub 博客仓的 hexo 分支</p>
+<ol>
+<li><p>将yourname.github.io 文件夹中的 .git 文件夹复制到博客文件夹的根目录</p>
+</li>
+<li><p>在博客目录下执行命令同步到远程的hexo分支</p>
+<figure class="highlight plaintext"><figcaption><span>bash</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs git">git add -A<br>git commit -m &quot;备份Hexo(提交的描述)&quot;<br>git push origin hexo<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>查看hexo分支的仓库</p>
+</li>
+</ol>
+<h2 id="新电脑的配置"><a href="#新电脑的配置" class="headerlink" title="新电脑的配置"></a>新电脑的配置</h2><ol>
+<li><p><strong>git</strong> <strong>bash</strong>将远程仓库克隆到本地</p>
+<figure class="highlight plaintext"><figcaption><span>bass</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs git">git clone git@github.com:yourname/yourname.github.io.git<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>然后进入项目目录，安装依赖启动博客服务器，生成静态文件</p>
+<figure class="highlight plaintext"><figcaption><span>bass</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs git">npm install<br>hexo g<br>hexo s<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>新电脑发布文章</p>
+<p>同之前的教程一样，写好文章后</p>
+<figure class="highlight plaintext"><figcaption><span>bass</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs git">hexo clean<br>hexo d -g<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="两台电脑同步写博客"><a href="#两台电脑同步写博客" class="headerlink" title="两台电脑同步写博客"></a>两台电脑同步写博客</h2><p>我们的博客仓库有两个分支，master分支和hexo分支</p>
+<p>其中，master分支用于存放Hexo生成的静态资源文件，hexo分支用于存放网站的原始文件</p>
+<p>所以，我们在一台设备上写好一篇文章或进行了博客的修改后</p>
+<p>执行以下命令，将master中的静态资源文件更新</p>
+<p>在博客目录下的cmd中</p>
+<figure class="highlight plaintext"><figcaption><span>bass</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs git">hexo clean<br>hexo d -g<br></code></pre></td></tr></table></figure>
+
+<p>执行以下命令，将hexo中的网站原始文件更新</p>
+<p>在博客目录下的git bash中</p>
+<figure class="highlight plaintext"><figcaption><span>bash</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs git">git pull<br>git add -A<br>git commit -m &quot;描述&quot;<br>git push origin hexo<br></code></pre></td></tr></table></figure>
+
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>每次有新的操作的时候，别忘了在另一台电脑上更新</p>
+<figure class="highlight plaintext"><figcaption><span>bash</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs git">git pull hexo<br></code></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Monkey_LZL/article/details/60870891">如何解决github+Hexo的博客多终端同步问题</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30105599/article/details/118302086?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-118302086-blog-60870891.235%5Ev43%5Epc_blog_bottom_relevance_base5&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-118302086-blog-60870891.235%5Ev43%5Epc_blog_bottom_relevance_base5&utm_relevant_index=2">多台电脑同步更新Hexo博客_hexo一个分支能实现多端互通吗-CSDN博客</a></p>
-</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Monkey_LZL/article/details/60870891">如何解决github+Hexo的博客多终端同步问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34291777/article/details/98723401">hexo博客 多终端同步使用_hexo多终端使用-CSDN博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30105599/article/details/118302086?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-118302086-blog-60870891.235%5Ev43%5Epc_blog_bottom_relevance_base5&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-118302086-blog-60870891.235%5Ev43%5Epc_blog_bottom_relevance_base5&utm_relevant_index=2">多台电脑同步更新Hexo博客_hexo一个分支能实现多端互通吗-CSDN博客</a></li>
 </ol>
 
                 
@@ -473,7 +538,7 @@
     Fluid.utils.loadComments('#valine', function() {
       Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"appId":"GBrAcgadRqa6THOqPCYRYBAX-MdYXbMMI","appKey":"X9SPEyOLnICmpMD9ldyGEwbB","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://gbracgad.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {"appId":"uboayIWebiTzy9FikBrR2sZw-gzGzoHsz","appKey":"VwXrclaI0qXGqHfEKkUFYMu6","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://uboayiwe.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
           {
             el: "#valine",
             path: window.location.pathname
@@ -638,6 +703,31 @@
        <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
   
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
   
   
   
