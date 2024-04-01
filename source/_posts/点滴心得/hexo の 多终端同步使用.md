@@ -10,6 +10,8 @@ archive:
 
 
 
+# 方法一
+
 ## 配置思路
 
 远程分支：maser、hexo存放不同文件内容。
@@ -79,7 +81,7 @@ archive:
    ```
 
 
-   
+
 
 二、部署过程中出现的问题
 
@@ -99,7 +101,136 @@ archive:
 
 
 
+# 方法二
+
+在利用Hexo+Github Pages写我们的博客的时候，真正的原始Hexo文件在我们的电脑本地，而GitHub上传的只是Hexo生成的静态网页，即public文件夹里面的内容。
+
+那么假如我们有两台电脑工作，Hexo最开始搭建在其中一台电脑上，而我们需要在另外一台电脑上同时更新我们的博客，该怎么做呢？
+
+也就是说，我们需要实现多台电脑间博客项目的迁移与同步。为实现这一点，我们可以利用Git的分支。
+
+
+
+## 配置Git分支
+
+1. 创建分支，并将之设置为默认分支
+
+   博客搭建好后，进入 GitHub 的 yourname.github.io 仓，创建一个名为 hexo 的分支
+
+   将博客项目仓库的 Settings -> Branches -> Default branch 修改为 hexo
+
+2. 将创建的分支的远程仓库克隆到本地
+
+   随便在一个文件夹中 open git bash
+
+   ```git bash
+   git clone git@github.com:yourname/yourname.github.io.git
+   ```
+
+   文件夹中将生成一个名为 yourname.github.io 文件夹
+
+3. 清空 GitHub 博客仓的 hexo 分支
+
+   1. 进入该 yourname.github.io 文件夹
+
+   2. 勾选查看隐藏的文件
+
+   3. 删去除.git文件夹以外的所有文件
+
+   4. 在克隆的仓库下分别执行以下命令更新删除操作到远程
+
+      ```git bash
+      git branch  # 确认你的分支，以防推送失误
+      git add -A
+      git commit -m "--"
+      git push origin hexo
+      ```
+
+4. 更新 GitHub 博客仓的 hexo 分支
+
+   1. 将yourname.github.io 文件夹中的 .git 文件夹复制到博客文件夹的根目录
+
+   2. 在博客目录下执行命令同步到远程的hexo分支
+
+      ```git bash
+      git add -A
+      git commit -m "备份Hexo(提交的描述)"
+      git push origin hexo
+      ```
+
+5. 查看hexo分支的仓库
+
+
+
+## 新电脑的配置
+
+1. **git** **bash**将远程仓库克隆到本地
+
+   ```git bass
+   git clone git@github.com:yourname/yourname.github.io.git
+   ```
+
+2. 然后进入项目目录，安装依赖启动博客服务器，生成静态文件
+
+   ```git bass
+   npm install
+   hexo g
+   hexo s
+   ```
+
+3. 新电脑发布文章
+
+   同之前的教程一样，写好文章后
+
+   ```git bass
+   hexo clean
+   hexo d -g
+   ```
+
+
+
+## 两台电脑同步写博客
+
+我们的博客仓库有两个分支，master分支和hexo分支
+
+其中，master分支用于存放Hexo生成的静态资源文件，hexo分支用于存放网站的原始文件
+
+所以，我们在一台设备上写好一篇文章或进行了博客的修改后
+
+执行以下命令，将master中的静态资源文件更新
+
+在博客目录下的cmd中
+
+```git bass
+hexo clean
+hexo d -g
+```
+
+执行以下命令，将hexo中的网站原始文件更新
+
+在博客目录下的git bash中
+
+```git bash
+git pull
+git add -A
+git commit -m "描述"
+git push origin hexo
+```
+
+## 注意事项
+
+每次有新的操作的时候，别忘了在另一台电脑上更新
+
+```git bash
+git pull hexo
+```
+
+
+
+
+
 ## 参考
 
 1. [如何解决github+Hexo的博客多终端同步问题](https://blog.csdn.net/Monkey_LZL/article/details/60870891)
-
+2. [hexo博客 多终端同步使用_hexo多终端使用-CSDN博客](https://blog.csdn.net/qq_34291777/article/details/98723401)
+2. [多台电脑同步更新Hexo博客_hexo一个分支能实现多端互通吗-CSDN博客](https://blog.csdn.net/qq_30105599/article/details/118302086?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-118302086-blog-60870891.235^v43^pc_blog_bottom_relevance_base5&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-118302086-blog-60870891.235^v43^pc_blog_bottom_relevance_base5&utm_relevant_index=2)

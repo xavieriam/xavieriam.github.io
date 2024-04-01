@@ -429,12 +429,12 @@ footer:
   # 展示网站的 PV、UV 统计数
   # Display website PV and UV statistics
   statistics:
-    enable: false
+    enable: true
 
     # 统计数据来源，使用 leancloud 需要设置 `web_analytics: leancloud` 中的参数；使用 busuanzi 不需要额外设置，但是有时不稳定，另外本地运行时 busuanzi 显示统计数据很大属于正常现象，部署后会正常
     # Data source. If use leancloud, you need to set the parameter in `web_analytics: leancloud`
     # Options: busuanzi | leancloud
-    source: "busuanzi"
+    source: "leancloud"
 
   # 国内大陆服务器的备案信息
   # For Chinese mainland website policy, other areas keep disable
@@ -787,8 +787,8 @@ gitalk:
 # Based on LeanCloud
 # See: https://valine.js.org/
 valine:
-  appId: GBrAcgadRqa6THOqPCYRYBAX-MdYXbMMI
-  appKey: X9SPEyOLnICmpMD9ldyGEwbB
+  appId: uboayIWebiTzy9FikBrR2sZw-gzGzoHsz
+  appKey: VwXrclaI0qXGqHfEKkUFYMu6
   path: window.location.pathname
   placeholder:
   avatar: 'retro'
@@ -798,7 +798,7 @@ valine:
   lang: 'zh-CN'
   highlight: false
   recordIP: false
-  serverURLs: 'https://gbracgad.api.lncldglobal.com'
+  serverURLs: 'https://uboayiwe.lc-cn-n1-shared.com'
   emojiCDN:
   emojiMaps:
   enableQQ: false
